@@ -25,8 +25,7 @@ SECRET_KEY = '91vgl4d-*kdhl&69hf&_9kqzzp5)iz+0*x)oxltg)w7*o)qxf*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['159.89.50.94']
+ALLOWED_HOSTS = ['localhost']
 
 # Application definition
 
@@ -54,11 +53,17 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'examen.urls'
 
-AUTH_USER_MODEL = 'Usuario.Account'
+AUTH_USER_MODEL = 'Account.Account'
 
 AUTHENTICATION_BACKENDS = ( 
     'django.contrib.auth.backends.AllowAllUsersModelBackend', 
     )
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': ( 'rest_framework.authentication.TokenAuthentication',),
+    'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',)
+}
+
 
 TEMPLATES = [
     {
@@ -84,8 +89,12 @@ WSGI_APPLICATION = 'examen.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'examen',
+        'USER': 'admin',
+        'PASSWORD': '123456',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -127,3 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
