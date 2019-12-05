@@ -26,7 +26,6 @@ class RegistrationSerializer(serializers.ModelSerializer):
 			email=self.validated_data['email'],
 			username=self.validated_data['username'],
 			name=self.validated_data['name'],
-			estado=self.validated_data['estado'],
 			)
 		if RegistrationSerializer.is_valid():
 			RegistrationSerializer.update(instance=instance.account)
@@ -50,14 +49,13 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class AccountSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Account
-		fields = ['name', 'email', 'username', 'estado', 'pic']
+		fields = ['name', 'email', 'username']
 
 	def	save(self):
 		account = Account(
 			email=self.validated_data['email'],
 			username=self.validated_data['username'],
 			name=self.validated_data['name'],
-			estado=self.validated_data['estado'],
 			)
 		account.save()
 		return account
