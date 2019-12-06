@@ -49,7 +49,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 class AccountSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Account
-		fields = ['name', 'email', 'username']
+		fields = ['name', 'email']
 
 	def	save(self):
 		account = Account(
